@@ -8,7 +8,7 @@
 <a href="https://github.com/softwaiter/markdown-website" target="_blank">点击打开源码下载页面</a>
 
 如果你并不想自己安装开发环境，自己编译代码，可以直接下载编译好的静态网页压缩包，解压即可。
-<a href="http://www.baidu.com">点击下载静态网页压缩包</a>
+<a href="https://github.com/softwaiter/markdown-website/releases/download/untagged-a288188b7fdf1172eec9/v1.0.0-preview.zip">点击下载静态网页压缩包</a>
 
 静态网页目录结构
 ├── css&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 网站样式文件
