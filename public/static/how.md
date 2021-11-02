@@ -5,7 +5,7 @@
 开始搭建网站，你首先需要先获取一套项目模板，根据你自己的情况，可以有两种方式供你选择：
 
 如果你是一个有前端开发经验，熟悉vue技术和ant-design-vue组件库，并且想自定义一些样式的话，可以通过复制源码，自己编译的方式进行。
-<a href="http://www.baidu.com" target="_blank">点击打开源码下载页面</a>
+<a href="https://github.com/softwaiter/markdown-website" target="_blank">点击打开源码下载页面</a>
 
 如果你并不想自己安装开发环境，自己编译代码，可以直接下载编译好的静态网页压缩包，解压即可。
 <a href="http://www.baidu.com">点击下载静态网页压缩包</a>
