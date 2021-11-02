@@ -1,0 +1,33 @@
+{
+    "title": "markdown-website",
+    "topicWidth": 250,
+    "openLevel": 1,
+    "topics": [
+    {
+      "id": "01",
+      "name": "markdown-website是什么？",
+      "src": "/static/what.md"
+    },
+    {
+        "id": "02",
+        "name": "开始使用",
+        "submenus": [
+        {
+            "id": "0201",
+            "name": "搭建markdown网站",
+            "src": "/static/how.md"
+        },
+        {
+            "id": "0202",
+            "name": "更多网站属性配置",
+            "src": "/static/edit.md"
+        },
+        {
+            "id": "0203",
+            "name": "部署发布",
+            "src": "/static/deploy.md"
+        }
+      ]
+    }
+  ]
+}
