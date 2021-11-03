@@ -4,4 +4,4 @@
 
 基于以上原因，Markdown-Website通过目录树的形式对markdown文件进行显示；同时，以静态网页的方式进行发布访问，既解决了分类归档的问题，又提供了随时随地方便访问的能力。
 
-![]( http://face.app100.info/md-wb.png )
+![]( https://camo.githubusercontent.com/b66fcfc9d83b0ae703a041fb2213e12e41e9fd2224f89a32900a72a904b551d4/687474703a2f2f666163652e6170703130302e696e666f2f6d642d77622e706e67 )
