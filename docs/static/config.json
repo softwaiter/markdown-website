@@ -6,7 +6,7 @@
     {
       "id": "01",
       "name": "markdown-website是什么？",
-      "src": "/static/what.md"
+      "src": "/markdown-website/static/what.md"
     },
     {
         "id": "02",
@@ -15,12 +15,12 @@
         {
             "id": "0201",
             "name": "搭建markdown网站",
-            "src": "/static/how.md"
+            "src": "/markdown-website/static/how.md"
         },
         {
             "id": "0202",
             "name": "更多网站属性配置",
-            "src": "/static/edit.md"
+            "src": "/markdown-website/static/edit.md"
         },
         {
             "id": "0203",
