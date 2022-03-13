@@ -13,7 +13,7 @@
               <a-menu-item v-if="!item.submenus || item.submenus.length < 1" :key="item.id" @click="menuItemClick(item)">
                 {{item.name}}
               </a-menu-item>
-              <sub-menu v-else :menu-info="item" :key="item.id" :menu-click-handler="menuItemClick"></sub-menu>
+              <sub-menu v-else :menu-info="item" :key="item.id" @menuClick="menuItemClick"></sub-menu>
             </template>
           </a-menu>
         </a-layout-sider>
@@ -42,10 +42,10 @@ const SubMenu = {
           <span>{{ menuInfo.name }}</span>
         </span>
         <template v-for="item in menuInfo.submenus">
-          <a-menu-item v-if="!item.submenus || item.submenus.length < 1" :key="item.id" @click="menuClickHandler(item)">
+          <a-menu-item v-if="!item.submenus || item.submenus.length < 1" :key="item.id" @click="subMenuClick(item)">
             <span>{{ item.name }}</span>
           </a-menu-item>
-          <sub-menu v-else :key="item.id" :menu-info="item" />
+          <sub-menu v-else :key="item.id" :menu-info="item" @menuClick='subMenuClick' />
         </template>
       </a-sub-menu>
     `,
@@ -58,8 +58,12 @@ const SubMenu = {
     menuInfo: {
       type: Object,
       default: () => ({})
-    },
-    menuClickHandler: {}
+    }
+  },
+  methods: {
+    subMenuClick: function(item) {
+      this.$emit('menuClick', item || this.menuInfo)
+    }
   }
 };
 
