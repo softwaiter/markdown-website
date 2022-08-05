@@ -77,7 +77,7 @@ export default {
     return {
       collapsed: false,
       sidebarWidth: 230,
-      markdownData: null,
+      markdownData: "",
       firstMenuItem: null,
       selectedMenuIds: [],
       expandMenuLevel: 1,
@@ -90,9 +90,11 @@ export default {
       this.genExpandMenuIds(this.menus, 1);
 
       this.selectedMenuIds.length = 0;
-      if (this.firstMenuItem != null) {
-        this.selectedMenuIds.push(this.firstMenuItem.id);
-        this.menuItemClick(this.firstMenuItem);
+      if (!this.parseUrl()) {
+        if (this.firstMenuItem != null) {
+          this.selectedMenuIds.push(this.firstMenuItem.id);
+          this.menuItemClick(this.firstMenuItem);
+        }
       }
     });
   },
@@ -107,6 +109,35 @@ export default {
           callback();
         }
       });
+    },
+    parseUrl() {
+      let url = window.location.href;
+      if (url.indexOf("?") > 0) {
+        url = url.substring(0, url.indexOf("?"));
+      }
+      if (url.endsWith("/")) {
+        url = url.substring(0, url.length - 1);
+      }
+      const menuId = url.substring(url.lastIndexOf("/") + 1);
+      const menuItem = this.findMenuById(this.menus, menuId);
+      if (menuItem) {
+        this.menuItemClick(menuItem);
+        return true;
+      }
+      return false;
+    },
+    findMenuById(items, id) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id == id) {
+          return items[i];
+        } else if (items[i].submenus && items[i].submenus.length > 0) {
+          const item = this.findMenuById(items[i].submenus, id);
+          if (item) {
+            return item;
+          }
+        }
+      }
+      return null;
     },
     genExpandMenuIds(menus, level) {
       if (level <= this.expandMenuLevel) {
@@ -141,6 +172,8 @@ export default {
     },
     menuItemClick(item) {
       if (item.src) {
+        this.selectedMenuIds.length = 0;
+        this.selectedMenuIds.push(item.id);
         this.openMarkdown(item.src);
       }
     }
