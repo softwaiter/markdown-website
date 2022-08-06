@@ -24,9 +24,14 @@
         },
         {
             "id": "0203",
-            "name": "部署发布",
+            "name": "如何部署发布",
             "src": "static/deploy.md"
-        }
+        },
+		{
+			"id": "0204",
+			"name": "链接跳转指定文档",
+			"src": "static/link.md"
+		}
       ]
     }
   ]

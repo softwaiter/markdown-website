@@ -8,7 +8,7 @@
 <a href="https://github.com/softwaiter/markdown-website" target="_blank">点击打开源码下载页面</a>
 
 如果你并不想自己安装开发环境，自己编译代码，可以直接下载编译好的静态网页压缩包，解压即可。
-<a href="https://github.com/softwaiter/markdown-website/releases/download/untagged-a288188b7fdf1172eec9/v1.0.0-preview.zip">点击下载静态网页压缩包</a>
+<a href="https://github.com/softwaiter/markdown-website/releases/download/v1.1.0-preview/v1.1.0-preview.zip">点击下载静态网页压缩包</a>
 
 静态网页目录结构
 ├── css&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 网站样式文件
@@ -34,7 +34,7 @@
     {
       "id": "01",
       "name": "markdown-website是什么？",
-      "src": "/static/what.md"
+      "src": "static/what.md"
     },
     {
         "id": "02",
@@ -43,17 +43,17 @@
         {
             "id": "0201",
             "name": "搭建markdown网站",
-            "src": "/static/how.md"
+            "src": "static/how.md"
         },
         {
             "id": "0202",
             "name": "更多网站属性配置",
-            "src": "/static/edit.md"
+            "src": "static/edit.md"
         },
         {
             "id": "0203",
             "name": "部署发布",
-            "src": "/static/deploy.md"
+            "src": "static/deploy.md"
         }
       ]
     }
@@ -74,7 +74,7 @@
 每一个目录节点是一个对象，对象内都包含如下4个属性：
 <b>id</b>：目录节点的唯一标识，不能重复。
 <b>name</b>：目录节点的显示名称。
-<b>src</b>：目录节点的关联markdown文件路径，即我们前面复制到static目录的markdown文件，如：/static/xxx.md；如果是父节点，可以不设置。
+<b>src</b>：目录节点的关联markdown文件路径，即我们前面复制到static目录的markdown文件。例如：static/xxx.md；也可以根据实际情况设置成外部链接，如：http://www.xxx.com/docs/readme.md。如果是包含`submenus`的父节点，可以不设置。
 <b>submenus</b>：子目录树节点，如果没有子节点，可以是空数组[]。
 
 实例，增加一个“我的收藏”的父节点：
@@ -107,12 +107,12 @@
                 {
                     "id": "0101",
                     "name": "给长城贴瓷砖方案",
-                    "src": "/static/给长城贴瓷砖方案.md"
+                    "src": "static/给长城贴瓷砖方案.md"
                 },
                 {
                     "id": "0102",
                     "name": "给珠峰装电梯方案",
-                    "src": "/static/给珠峰装电梯方案.md"
+                    "src": "static/给珠峰装电梯方案.md"
                 }
             ]
         }
@@ -121,3 +121,7 @@
 ```
 
 基于以上方式，可以根据自己的实际情况和需要，定义目录树的结构。理论上，支持无限层级，但从实际效果来看，2~3层效果最佳。
+
+
+
+<b>注：</b>`src`属性在设置事需要特别注意，如果网站最终部署在根目录，如”www.xxx.com“，这时设置绝对路径"/static/what.md"或者相对路径”static/what.md“都没有问题，能够正常访问；如果网站部署在子目录，如”www.xxx.com/markdown-website“，此时，src属性必须设置成相对路径”static/what.md“，否则，将不能正常访问文档内容。
