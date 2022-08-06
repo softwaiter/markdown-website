@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     loadConfig(callback) {
-      axios.get("/static/config.json").then(res => {
+      axios.get("static/config.json").then(res => {
         document.title = res.data.title;
         this.sidebarWidth = res.data.topicWidth;
         this.expandMenuLevel = res.data.openLevel;
