@@ -118,7 +118,7 @@ export default {
     },
     parseUrl() {
       let url = window.location.href;
-      if (url.indexOf("/#/")) {
+      if (url.indexOf("/#/") > 0) {
         url = url.substring(url.indexOf("/#/") + 3);
         if (url.indexOf("?") > 0) {
           url = url.substring(0, url.indexOf("?"));
@@ -184,7 +184,7 @@ export default {
       if (url.indexOf("?") > 0) {
         url = url.substring(0, url.indexOf("?"));
       }
-      if (url.indexOf("/#/")) {
+      if (url.indexOf("/#/") > 0) {
         url = url.substring(0, url.indexOf("/#/"));
       }
       if (url.endsWith("/")) {
