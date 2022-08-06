@@ -191,7 +191,9 @@ export default {
         url = url.substring(0, url.length - 1);
       }
       url += "/#/" + item.id;
-      history.pushState(null, null, url);
+      if (url != window.location.href) {
+        history.pushState(null, null, url);
+      }
     },
     menuItemClick(item) {
       if (item.src) {
