@@ -75,7 +75,6 @@ export default {
   },
   data() {
     return {
-      publicPath: '/',
       collapsed: false,
       sidebarWidth: 230,
       markdownData: "",
@@ -112,7 +111,6 @@ export default {
     loadConfig(callback) {
       axios.get("static/config.json").then(res => {
         document.title = res.data.title;
-        this.publicPath = res.data.publicPath || '|';
         this.sidebarWidth = res.data.topicWidth;
         this.expandMenuLevel = res.data.openLevel;
         this.menus = res.data.topics;
@@ -122,33 +120,11 @@ export default {
       });
     },
     parseUrl() {
-      const baseUrl = window.location.origin + this.publicPath;
-      let url = window.location.href;
-
-      console.log(baseUrl)
-      console.log(url)
-      console.log("======================================")
-
-      if (url.indexOf(baseUrl) >= 0) {
-        url = url.substring(url.indexOf(baseUrl) + baseUrl.length);
-        if (url.indexOf("?") > 0) {
-          url = url.substring(0, url.indexOf("?"));
-        }
-        if (url.indexOf("#") > 0) {
-          url = url.substring(0, url.indexOf("#"));
-        }
-        if (url.startsWith("/")) {
-          url = url.substring(1);
-        }
-        if (url.endsWith("/")) {
-          url = url.substring(0, url.length - 1);
-        }
-
-        const menuId = url;
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('item')) {
+        const menuId = params.get('item');
         const menuItem = this.findMenuById(this.menus, menuId);
         if (menuItem) {
-          console.log("menuItem: " + menuItem);
-
           this.menuItemClick(menuItem);
           return true;
         }
@@ -200,13 +176,15 @@ export default {
       });
     },
     updateBrowserUrl(item) {
-      let url = window.location.origin + this.publicPath;
-      if (url.endsWith("/")) {
-        url = url.substring(0, url.length - 1);
+      let nowUrl = '';
+      const pos = window.location.href.lastIndexOf("/");
+      if (pos >= 0) {
+        nowUrl = window.location.href.substring(pos);
       }
-      url += "/" + item.id;
-      if (url != window.location.href) {
-        history.pushState(null, null, url);
+
+      const newUrl = "/?item=" + item.id;
+      if (newUrl != nowUrl) {
+        history.pushState(null, null, newUrl);
       }
     },
     menuItemClick(item) {
