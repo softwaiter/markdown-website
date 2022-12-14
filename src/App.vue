@@ -124,6 +124,11 @@ export default {
     parseUrl() {
       const baseUrl = window.location.origin + this.publicPath;
       let url = window.location.href;
+
+      console.log(baseUrl)
+      console.log(url)
+      console.log("======================================")
+
       if (url.indexOf(baseUrl) >= 0) {
         url = url.substring(url.indexOf(baseUrl) + baseUrl.length);
         if (url.indexOf("?") > 0) {
@@ -131,6 +136,9 @@ export default {
         }
         if (url.indexOf("#") > 0) {
           url = url.substring(0, url.indexOf("#"));
+        }
+        if (url.startsWith("/")) {
+          url = url.substring(1);
         }
         if (url.endsWith("/")) {
           url = url.substring(0, url.length - 1);
