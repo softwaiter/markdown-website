@@ -75,6 +75,7 @@ export default {
   },
   data() {
     return {
+      subPath: '/',
       collapsed: false,
       sidebarWidth: 230,
       markdownData: "",
@@ -111,6 +112,7 @@ export default {
     loadConfig(callback) {
       axios.get("static/config.json").then(res => {
         document.title = res.data.title;
+        this.subPath = res.data.subPath || '|';
         this.sidebarWidth = res.data.topicWidth;
         this.expandMenuLevel = res.data.openLevel;
         this.menus = res.data.topics;
@@ -176,14 +178,12 @@ export default {
       });
     },
     updateBrowserUrl(item) {
-      let nowUrl = '';
-      const pos = window.location.href.lastIndexOf("/");
-      if (pos >= 0) {
-        nowUrl = window.location.href.substring(pos);
+      let newUrl = window.location.origin + this.subPath;
+      if (!newUrl.endsWith('/')) {
+        newUrl += '/';
       }
-
-      const newUrl = "/?item=" + item.id;
-      if (newUrl != nowUrl) {
+      newUrl += "?item=" + item.id;
+      if (newUrl != window.location.href) {
         history.pushState(null, null, newUrl);
       }
     },
