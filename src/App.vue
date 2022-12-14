@@ -147,6 +147,8 @@ export default {
         const menuId = url;
         const menuItem = this.findMenuById(this.menus, menuId);
         if (menuItem) {
+          console.log("menuItem: " + menuItem);
+
           this.menuItemClick(menuItem);
           return true;
         }
