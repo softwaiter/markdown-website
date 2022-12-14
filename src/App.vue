@@ -183,7 +183,14 @@ export default {
         newUrl += '/';
       }
       newUrl += "?item=" + item.id;
-      if (newUrl != window.location.href) {
+
+      let oldUrl = window.location.href;
+      const pos = oldUrl.indexOf('#');
+      if (pos >= 0) {
+        oldUrl = oldUrl.substring(0, pos);
+      }
+
+      if (newUrl != oldUrl) {
         history.pushState(null, null, newUrl);
       }
     },
