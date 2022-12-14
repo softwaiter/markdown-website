@@ -75,6 +75,7 @@ export default {
   },
   data() {
     return {
+      publicPath: '/',
       collapsed: false,
       sidebarWidth: 230,
       markdownData: "",
@@ -98,8 +99,11 @@ export default {
       }
 
       if (('onhashchange' in window)) {
-        window.onhashchange = () => {
-          window.location.reload();
+        window.onhashchange = (e) => {
+          const subPath = e.newURL.replace(e.oldURL, "");
+          if (!subPath.startsWith('#')) {
+            window.location.reload();
+          }
         }
       }
     });
@@ -108,6 +112,7 @@ export default {
     loadConfig(callback) {
       axios.get("static/config.json").then(res => {
         document.title = res.data.title;
+        this.publicPath = res.data.publicPath || '|';
         this.sidebarWidth = res.data.topicWidth;
         this.expandMenuLevel = res.data.openLevel;
         this.menus = res.data.topics;
@@ -117,15 +122,20 @@ export default {
       });
     },
     parseUrl() {
+      const baseUrl = window.location.origin + this.publicPath;
       let url = window.location.href;
-      if (url.indexOf("/#/") > 0) {
-        url = url.substring(url.indexOf("/#/") + 3);
+      if (url.indexOf(baseUrl) >= 0) {
+        url = url.substring(url.indexOf(baseUrl) + baseUrl.length);
         if (url.indexOf("?") > 0) {
           url = url.substring(0, url.indexOf("?"));
+        }
+        if (url.indexOf("#") > 0) {
+          url = url.substring(0, url.indexOf("#"));
         }
         if (url.endsWith("/")) {
           url = url.substring(0, url.length - 1);
         }
+
         const menuId = url;
         const menuItem = this.findMenuById(this.menus, menuId);
         if (menuItem) {
@@ -180,17 +190,11 @@ export default {
       });
     },
     updateBrowserUrl(item) {
-      let url = window.location.href;
-      if (url.indexOf("?") > 0) {
-        url = url.substring(0, url.indexOf("?"));
-      }
-      if (url.indexOf("/#/") > 0) {
-        url = url.substring(0, url.indexOf("/#/"));
-      }
+      let url = window.location.origin + this.publicPath;
       if (url.endsWith("/")) {
         url = url.substring(0, url.length - 1);
       }
-      url += "/#/" + item.id;
+      url += "/" + item.id;
       if (url != window.location.href) {
         history.pushState(null, null, url);
       }
