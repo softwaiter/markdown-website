@@ -100,8 +100,19 @@ export default {
 
       if (('onhashchange' in window)) {
         window.onhashchange = (e) => {
-          const subPath = e.newURL.replace(e.oldURL, "");
-          if (!subPath.startsWith('#')) {
+          let newItem = '';
+          const newParams = new URLSearchParams(e.newURL)
+          if (newParams.has('item')) {
+            newItem = newParams.get('item');
+          }
+
+          let oldItem = '';
+          const oldParams = new URLSearchParams(e.oldURL)
+          if (oldParams.has('item')) {
+            oldItem = oldParams.get('item');
+          }
+
+          if (oldItem != newItem) {
             window.location.reload();
           }
         }
